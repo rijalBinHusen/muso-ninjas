@@ -3,11 +3,11 @@ import { ref } from "vue";
 import { projectAuth } from "../firebase/firebaseApp";
 
 const error = ref(null);
-const isPendig = ref(false);
+const isPending = ref(false);
 
 const signup = async (email, password, displayName) => {
   try {
-    isPendig.value = false;
+    isPending.value = false;
     const res = await projectAuth.createUserWithEmailAndPassword(
       email,
       password
@@ -18,6 +18,7 @@ const signup = async (email, password, displayName) => {
     await res.user.updateProfile({ displayName: displayName });
     // console.log(res.user);
     error.value = null;
+    isPending.value = false;
     return res;
   } catch (err) {
     error.value = err.message;
