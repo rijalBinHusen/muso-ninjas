@@ -7,7 +7,7 @@
                 </router-link>
             </h1>
             <div class="links">
-                <button>Logout</button>
+                <button @click="handleLogout">Logout</button>
                 <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
                 <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
             </div>
@@ -15,6 +15,25 @@
     </div>
 </template>
 
+<script>
+import useLogout from '../composable/userLogout'
+import { useRouter } from 'vue-router'
+
+export default {
+    setup() {
+        const { logout } = useLogout()
+        const router = useRouter()
+
+        const handleLogout = async () => {
+            console.log('logout')
+            await  logout()
+            router.push({ name: 'Login'})
+        }
+
+        return { handleLogout }
+    },
+}
+</script>
 
 <style scoped>
     .navbar {
