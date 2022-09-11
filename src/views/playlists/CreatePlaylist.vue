@@ -5,8 +5,8 @@
         <textarea cols="30" rows="5" required v-model="description" placeholder="Playlist description"></textarea>
         <!-- Playlist image -->
         <label for="file">Upoad playlist cover image</label>
-        <input type="file" id="file" >
-        <div class="error"></div>
+        <input type="file" id="file" @change="handleChange" >
+        <div class="error"> {{ fileError }} </div>
         <button>Create</button>
     </form>
 </template>
@@ -17,12 +17,31 @@ export default {
     setup() {
         const title = ref('')
         const description = ref('')
+        const file = ref(null)
+        const fileError = ref(null)
 
         const handleSubmit = () => {
-            console.log(title.value, description.value)
+            if(file.value) {
+                console.log(title.value, description.value, fileError.value)
+            }
         }
 
-        return { title, description, handleSubmit }
+        // allowed file types
+        const types = ['image/png', 'image/jpeg', 'image/jpg' ]
+
+        const handleChange = (e) => {
+            const selected = e.target.files[0]
+
+            if(selected && types.includes(selected.type)) {
+                    file.value = selected
+                    fileError.value = null
+            } else {
+                file.value = null
+                fileError.value = 'Please select an image file (png or jpg)'
+            }
+        }
+
+        return { title, description, handleSubmit, handleChange, fileError }
     },
 }
 </script>
