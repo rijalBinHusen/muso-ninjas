@@ -7,9 +7,13 @@
                 </router-link>
             </h1>
             <div class="links">
-                <button @click="handleLogout">Logout</button>
-                <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
-                <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+                <div v-if="user">
+                    <button @click="handleLogout">Logout</button>
+                </div>
+                <div v-else>
+                    <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
+                    <router-link class="btn" :to="{ name: 'Login' }">Login</router-link>
+                </div>
             </div>
         </nav>
     </div>
@@ -18,11 +22,13 @@
 <script>
 import useLogout from '../composable/userLogout'
 import { useRouter } from 'vue-router'
+import getUser from '../composable/getUser'
 
 export default {
     setup() {
         const { logout } = useLogout()
         const router = useRouter()
+        const { user } = getUser()
 
         const handleLogout = async () => {
             console.log('logout')
@@ -30,7 +36,7 @@ export default {
             router.push({ name: 'Login'})
         }
 
-        return { handleLogout }
+        return { handleLogout, user }
     },
 }
 </script>
