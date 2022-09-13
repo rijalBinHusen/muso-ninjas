@@ -15,8 +15,7 @@ const useStorage = () => {
 
     try {
       const res = await storageRef.put(file);
-      url.value = res.ref.getDownloadUrl();
-      console.log(res);
+      url.value = await res.ref.getDownloadURL();
     } catch (error) {
       error.value = error.message;
       console.log(error.message);

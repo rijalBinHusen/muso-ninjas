@@ -7,17 +7,24 @@
         <label for="file">Upoad playlist cover image</label>
         <input type="file" id="file" @change="handleChange" >
         <div class="error"> {{ fileError }} </div>
-        <button>Create</button>
+        <button v-if="!isPending">Create</button>
+        <button v-else disabled>Saving...</button>
     </form>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity'
 import useStorage from '@/composable/useStorage'
+import useCollection from '@/composable/useCollection'
+import getUser from '@/composable/getUser'
+import { timestamp } from '../../firebase/firebaseApp'
 
 export default {
     setup() {
         const { filePath, url, uploadImage } = useStorage()
+        const { error, addDoc } = useCollection('playlists')
+        const { user } = getUser()
+        const isPending = ref(false)
 
         const title = ref('')
         const description = ref('')
@@ -26,8 +33,26 @@ export default {
 
         const handleSubmit = async () => {
             if(file.value) {
+                // start
+                isPending.value = true
                 await uploadImage(file.value)
-                console.log('image uploaded', url.value)
+                await addDoc({
+                    title: title.value,
+                    description: description.value,
+                    userId: user.value.uid,
+                    userName: user.value.displayName,
+                    coverUrl: url.value,
+                    filePath: filePath.value,
+                    songs: [],
+                    createdAt: timestamp()
+                })
+                // end
+                isPending.value = false
+                if(!error.value) {
+                    console.log('playlist added')
+                } else {
+                    console.log(error.value)
+                }
             }
         }
 
@@ -46,7 +71,7 @@ export default {
             }
         }
 
-        return { title, description, handleSubmit, handleChange, fileError }
+        return { title, description, handleSubmit, handleChange, fileError, isPending }
     },
 }
 </script>
