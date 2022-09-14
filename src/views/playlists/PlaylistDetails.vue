@@ -25,6 +25,7 @@ import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import getDocument from '../../composable/getDocument'
 import getUser from '../../composable/getUser'
+import useDocument from '../../composable/useDocument'
 
 export default {
     props: ['id'],
@@ -33,12 +34,17 @@ export default {
         const id = route.params.id
         const { error, document: playlist } = getDocument('playlists', id)
         const { user } = getUser()
+        const { deleteDoc } = useDocument('playlists', id)
 
         const ownership = computed(() => {
           return playlist.value && user.value && user.value.uid == playlist.value.userId
         })
 
-        return { id, error, playlist, ownership }
+        const handleDelete = async () => {
+          await deleteDoc()
+        }
+
+        return { id, error, playlist, ownership, handleDelete }
     },
 }
 </script>
