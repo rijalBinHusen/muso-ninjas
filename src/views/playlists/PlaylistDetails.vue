@@ -10,6 +10,7 @@
                 <h1> {{ playlist.title }} </h1>
                 <p class="username"> Created by : {{ playlist.userName }} </p>
                 <p class="description"> {{ playlist.description }} </p>
+                <button v-if="ownership">Delete playlist</button>
             </div>
             <!-- songlists -->
             <div class="song-list">
@@ -20,8 +21,10 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import getDocument from '../../composable/getDocument'
+import getUser from '../../composable/getUser'
 
 export default {
     props: ['id'],
@@ -29,8 +32,13 @@ export default {
         const route = useRoute()
         const id = route.params.id
         const { error, document: playlist } = getDocument('playlists', id)
+        const { user } = getUser()
 
-        return { id, error, playlist }
+        const ownership = computed(() => {
+          return playlist.value && user.value && user.value.uid == playlist.value.userId
+        })
+
+        return { id, error, playlist, ownership }
     },
 }
 </script>
