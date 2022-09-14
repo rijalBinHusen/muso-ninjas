@@ -14,15 +14,15 @@
             </div>
             <!-- songlists -->
             <div class="song-list">
-                <p v-if="!playlist.songs.length">No song have been added to this playlist</p>
-                <div v-for="song in playlist.songs" :key="song.id" class="single-song">
-                  <div class="details">
-                    <h3> {{ song.title }} </h3>
-                    <p> {{ song.artist }} </p>
-                    <button v-if="ownership"> Delete </button>
-                  </div>
+              <div v-if="!playlist.songs.length">No songs have been added to this playlist yet.</div>
+              <div v-for="song in playlist.songs" :key="song.id" class="single-song">
+                <div class="details">
+                  <h3>{{ song.title }}</h3>
+                  <p>{{ song.artist }}</p>
                 </div>
-                <AddSong v-if="ownership" :playlist="playlist" />
+                <button @click="handleClick(song.id)" v-if="ownership">delete</button>
+              </div>
+              <AddSong :playlist="playlist" />
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@ export default {
         const id = route.params.id
         const { error, document: playlist } = getDocument('playlists', id)
         const { user } = getUser()
-        const { deleteDoc } = useDocument('playlists', id)
+        const { deleteDoc, updateDoc } = useDocument('playlists', id)
         const { deleteImage } = useStorage()
 
         const ownership = computed(() => {
@@ -59,7 +59,12 @@ export default {
           router.push({ name: 'Home'})
         }
 
-        return { id, error, playlist, ownership, handleDelete }
+        const handleClick = async (id) => {
+          const songs = playlist.value.songs.filter((song) => song.id != id)
+          await updateDoc({ songs })
+        }
+
+        return { id, error, playlist, ownership, handleDelete, handleClick }
     },
 }
 </script>
