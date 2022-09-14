@@ -23,6 +23,7 @@ export default {
         const { updateDoc } = useDocument('playlists', props.playlist.id)
 
         const handleSubmit = async () => {
+            showForm.value = false
             const newSong = {
                 title: title.value,
                 artist: artist.value,
@@ -33,7 +34,6 @@ export default {
                 songs: [...props.playlist.songs, newSong]
             })
 
-            showForm.value = false
             title.value = ''
             artist.value = ''
         }
