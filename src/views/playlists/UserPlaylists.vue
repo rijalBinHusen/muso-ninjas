@@ -1,14 +1,19 @@
 <template>
     <div class="user-playlist">
         <h2>My playlist</h2>
+        <div v-if="playlists">
+            <ListViewVue :playlists="playlists" />
+        </div>
     </div>
 </template>
 
 <script>
     import getCollection from '../../composable/getCollection';
     import getUser from '../../composable/getUser';
+    import ListViewVue from '../../components/ListView.vue';
 
     export default {
+        components: { ListViewVue },
         setup () {
             const { user } = getUser()
 
@@ -17,7 +22,6 @@
                                                             ['userId', '==', user.value.uid]
                                                         )
             
-            console.log(playlists)
             return { playlists }
         }
     }
