@@ -16,12 +16,14 @@
 <script>
 import { ref } from '@vue/reactivity'
 import useSignUp from '@/composable/userSignup.js'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
         const email = ref('')
         const password = ref('')
         const displayName = ref('')
+        const router = useRouter()
 
         const { error, signup, isPending } = useSignUp()
 
@@ -29,6 +31,7 @@ export default {
             signup(email.value, password.value, displayName.value)
             if(!error.value) {
                 console.log('user registered')
+                router.push({ name: 'UserPlaylists'})
             }
         }
 
