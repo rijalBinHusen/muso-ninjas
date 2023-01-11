@@ -15,7 +15,7 @@ import ListView from '../components/ListView.vue'
 export default {
   name: 'Home',
   setup() {
-    const { error, documents } = getCollection('playlists')
+    const { error, documents } = getCollection('muso_ninjas_playlists')
 
     return { error, documents }
   },

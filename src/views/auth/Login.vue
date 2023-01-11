@@ -12,6 +12,25 @@
             <button>Signup</button>
         </router-link>
     </form>
+        <div style="margin-top:100px;">
+            <div>
+                <h3>User for test:</h3>
+                <ul>
+                    <li>Email: <b>rijalbinhusen2@tester.com</b>, password: <b>123456</b></li>
+                    <li>Email: <b>rijalbinhusen@test.com</b>, password: <b>123456</b></li>
+                </ul>
+            </div>
+            <div style="margin-top:50px;">
+                <h3>What kind of application is this?:</h3>
+                <ul>
+                    <li>Apllication to create your own song playlists</li>
+                    <li>The user can create new application</li>
+                    <li>Another user can add song to all playlists</li>
+                    <li>Only the owner playlists can delete song or playlists</li>
+                </ul>
+            </div>
+
+        </div>
 </template>
 
 <script>

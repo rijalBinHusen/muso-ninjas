@@ -44,9 +44,9 @@ export default {
         const route = useRoute()
         const router = useRouter()
         const id = route.params.id
-        const { error, document: playlist } = getDocument('playlists', id)
+        const { error, document: playlist } = getDocument('muso_ninjas_playlists', id)
         const { user } = getUser()
-        const { deleteDoc, updateDoc } = useDocument('playlists', id)
+        const { deleteDoc, updateDoc } = useDocument('muso_ninjas_playlists', id)
         const { deleteImage } = useStorage()
 
         const ownership = computed(() => {

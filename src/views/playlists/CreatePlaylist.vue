@@ -23,7 +23,7 @@ import { useRouter } from 'vue-router'
 export default {
     setup() {
         const { filePath, url, uploadImage } = useStorage()
-        const { error, addDoc } = useCollection('playlists')
+        const { error, addDoc } = useCollection('muso_ninjas_playlists')
         const { user } = getUser()
         const isPending = ref(false)
         const router = useRouter()

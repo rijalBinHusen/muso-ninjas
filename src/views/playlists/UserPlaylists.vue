@@ -21,7 +21,7 @@
             const { user } = getUser()
 
             const { documents: playlists } = getCollection(
-                                                            'playlists', 
+                                                            'muso_ninjas_playlists', 
                                                             ['userId', '==', user.value.uid]
                                                         )
             
