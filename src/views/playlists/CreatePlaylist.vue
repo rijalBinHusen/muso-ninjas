@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 import useStorage from '@/composable/useStorage'
 import useCollection from '@/composable/useCollection'
 import getUser from '@/composable/getUser'

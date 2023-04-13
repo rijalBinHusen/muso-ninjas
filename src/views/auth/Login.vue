@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 import useLogin from "@/composable/userLogin"
 import { useRouter } from 'vue-router'
 

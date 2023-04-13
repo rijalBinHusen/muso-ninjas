@@ -14,7 +14,7 @@
 
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref } from 'vue'
 import useSignUp from '@/composable/userSignup.js'
 import { useRouter } from 'vue-router'
 

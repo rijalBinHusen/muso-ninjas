@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import getDocument from '../../composable/getDocument'
 import getUser from '../../composable/getUser'
