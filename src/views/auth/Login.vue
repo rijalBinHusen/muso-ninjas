@@ -16,8 +16,8 @@
             <div>
                 <h3>User for test:</h3>
                 <ul>
-                    <li>Email: <b>rijalbinhusen2@tester.com</b>, password: <b>123456</b></li>
-                    <li>Email: <b>rijalbinhusen@test.com</b>, password: <b>123456</b></li>
+                    <li>Email: <b>test2@test.com</b>, password: <b>123456</b></li>
+                    <li>Email: <b>test@test.com</b>, password: <b>123456</b></li>
                 </ul>
             </div>
             <div style="margin-top:50px;">

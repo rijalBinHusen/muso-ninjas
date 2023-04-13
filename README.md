@@ -1,5 +1,7 @@
 # muso-ninjas
 
+Demo of this project is [here](https://rijalbinhusen-muso-ninjas.netlify.app/login)
+
 ## Project setup
 ```
 npm install
